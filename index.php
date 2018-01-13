@@ -2,10 +2,12 @@
 
 require( './class/config.inc.php' );
 
-$conn = new Mysql;
-$conn->select('SELECT * FROM tb_users');
+$user = new Usuario();
 
-debug( $conn->getResult() );
+$user->loadById(1);
+
+echo $user;
+
 
 
 

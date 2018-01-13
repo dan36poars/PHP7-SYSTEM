@@ -39,7 +39,8 @@ class Mysql extends PDO
 
 		$stmt = $this->query( $rawQuery, $params );
 		$this->Result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-						
+		return $this->getResult();
+
 	}
 
 	public function getResult(){
