@@ -24,7 +24,15 @@ class Mysql extends PDO
 	
 	function __construct()
 	{		
-			$this->Conn = new PDO(self::Dns.':dbname='.self::Db.';host='.self::Host, self::User, self::Pass);			
+
+			try {
+				$this->Conn = new PDO(self::Dns.':dbname='.self::Db.';host='.self::Host, self::User, self::Pass);
+				$this->Conn->exec("set names utf8");
+				
+			} catch (PDOException $e) {
+				echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
+			}
+
 	}
 
 	public function query( $rawQuery, $params = array() ){

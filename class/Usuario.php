@@ -50,6 +50,24 @@ class Usuario
 		}
 	}
 
+	/**
+	 * Add a new user on data base
+	 **/
+	public function insert( $login, $pass ){
+		$sql = new Mysql();
+		$result = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASS)", array(
+			':LOGIN' => $login,
+			':PASS' => $pass
+		));
+
+		if ( isset($result[0]) ) {
+			$this->setResult($result[0]);	
+		}else{
+			$this->Result = false;
+			$this->Error = ['WS_ERROR', 'Erro ao inserir um novo dado no banco'];
+		}
+	}
+
 	public function __toString(){
 		return json_encode(array(
 			'Result' => $this->getResult()

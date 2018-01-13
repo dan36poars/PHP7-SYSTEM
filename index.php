@@ -1,7 +1,7 @@
 <?php
 
 require( './class/config.inc.php' );
-
+header("Content-type= text/html; charset=utf-8");
 // Carrega um usuarios buscando pelo Id
 //------------------------------------
 
@@ -41,7 +41,12 @@ require( './class/config.inc.php' );
 // Busca o usuario passando senha e login
 //---------------------------------------
 
-$login = new Usuario();
-$login->login('Root', 'user');
-echo $login;
+// $login = new Usuario();
+// $login->login('Root', 'user');
+// echo $login;
+
+// Inserindo um novo usuario no banco
+$aluno = new Usuario();
+$aluno->insert('São borja', 'grêmioggre#$');
+echo $aluno;
 ?>
