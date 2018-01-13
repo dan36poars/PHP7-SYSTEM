@@ -1,0 +1,73 @@
+<?php
+
+/**
+* Class Mysql [DAO]
+* classe responsável em se comunicar com
+* o banco de dados com o driver mysql
+* @author Daniel Corrêa, Geekyweb Ltda 2018.
+*/
+
+
+class Mysql extends PDO
+{
+	/* Variáveis privadas */
+	private $Conn;
+	private $Result = array();
+	private $Error;
+
+	/* Constantes */
+	Const Dns = 'mysql';
+	Const Host = 'localhost';
+	Const User = 'root';
+	Const Pass = '';
+	Const Db = 'dbphp7';
+	
+	function __construct()
+	{		
+			$this->Conn = new PDO(self::Dns.':dbname='.self::Db.';host='.self::Host, self::User, self::Pass);			
+	}
+
+	public function query( $rawQuery, $params = array() ){
+
+		$stmt = $this->Conn->prepare( $rawQuery );		
+		$this->setParams( $stmt, $params );
+	 	$stmt->execute();		
+		return $stmt;
+	}
+
+	public function select( $rawQuery, $params = array() ) {
+
+		$stmt = $this->query( $rawQuery, $params );
+		$this->Result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						
+	}
+
+	public function getResult(){
+		return $this->Result;
+	}
+
+	public function getError(){
+		return $this->Error;
+	}
+
+// PRIVATE METHODS
+
+
+	private function setParams( $statement, $parameters = array() ){
+
+		foreach ($parameters as $key => $value) {
+			$this->setParam( $statement, $key, $value );
+		}
+
+	}
+
+	private function setParam( $statement, $key, $value ){
+		$statement->bindParam( $key, $value );
+	}
+
+
+}
+
+
+
+?>
