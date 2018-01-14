@@ -16,7 +16,7 @@ spl_autoload_register( function( $className ){
 function Debug( $Var ){
 	echo "<pre>";
 	var_dump( $Var );
-	echo "</pre>";
+	echo "</pre>";	
 }
 
 

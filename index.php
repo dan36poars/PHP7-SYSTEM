@@ -2,6 +2,7 @@
 
 require( './class/config.inc.php' );
 header("Content-type= text/html; charset=utf-8");
+
 // Carrega um usuarios buscando pelo Id
 //------------------------------------
 
@@ -46,7 +47,13 @@ header("Content-type= text/html; charset=utf-8");
 // echo $login;
 
 // Inserindo um novo usuario no banco
-$aluno = new Usuario();
-$aluno->insert('São borja', 'grêmioggre#$');
-echo $aluno;
+// $aluno = new Usuario();
+// $aluno->insert('São borja', 'grêmioggre#$');
+// echo $aluno;
+
+// Atualizando umnovo usuario no banco
+$user = new Usuario();
+$user->loadById(8);
+$user->update("Melissa", "meligata@outlook.com");
+echo $user;
 ?>

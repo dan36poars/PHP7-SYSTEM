@@ -68,6 +68,33 @@ class Usuario
 		}
 	}
 
+	/**
+	 * update data inside database.
+	 * @param $login
+	 * @param $pass
+	 * @param $id = null
+	 **/
+	public function update( $login, $pass, $id = null ){
+		$id = ( $id === null ? $this->Result['idusuario'] : $id );
+		$sql = new Mysql();
+		$result = $sql->query("UPDATE tb_users SET deslogin = :LOGIN, dessenha = :PASS WHERE idusuario = :ID", array(
+			":LOGIN" => $login,
+			":PASS" => $pass,
+			":ID" => $id
+		));
+
+		if ( isset($result) ) {
+			$this->setResult(true);
+		}else{
+			$this->Result = false;
+			$this->Error = ['WS_ERROR', 'Erro ao atualizar dado no banco'];
+		}
+	}
+
+	/**
+	 * Magic Method : mostra os dados em JSON.
+	 * Uso: echo <Nome_da_instância>
+	 **/
 	public function __toString(){
 		return json_encode(array(
 			'Result' => $this->getResult()
