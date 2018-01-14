@@ -51,15 +51,25 @@ header("Content-type= text/html; charset=utf-8");
 // $aluno->insert('São borja', 'grêmioggre#$');
 // echo $aluno;
 
-// Atualizando umnovo usuario no banco
+// Atualizando um novo usuario no banco
 // $user = new Usuario();
 // $user->loadById(8);
 // $user->update("Melissa", "meligata@outlook.com");
 // echo $user;
 
 // Deletar usuario do sistema
-$user = new Usuario();
-$user->loadById(18);
-$user->delete();
-echo $user;
+// $user = new Usuario();
+// $user->loadById(18);
+// $user->delete();
+// echo $user;
+
+$users = Usuario::getList();
+
+foreach ($users as $user) {
+	foreach ($user as $key => $value) {
+			echo  $key." : ".$value."<br>";
+		}	
+		echo "<hr>";
+}
+
 ?>

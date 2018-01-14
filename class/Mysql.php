@@ -36,7 +36,6 @@ class Mysql extends PDO
 	}
 
 	public function query( $rawQuery, $params = array() ){
-		debug( $params );
 		$stmt = $this->Conn->prepare( $rawQuery );		
 		$this->setParams( $stmt, $params );
 	 	$stmt->execute();		
