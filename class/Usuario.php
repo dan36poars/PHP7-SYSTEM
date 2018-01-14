@@ -91,19 +91,49 @@ class Usuario
 		}
 	}
 
+
+	/**
+	 * delete
+	 * delete data about a certain user
+	 * @return void
+	 */
+	public function delete() {
+		$sql = new Mysql();
+		
+		$result = $sql->query("DELETE FROM tb_users WHERE idusuario = :ID ", array(
+			":ID" => $this->getResult()['idusuario']
+		));
+
+		if (isset($result)) {
+			$this->result = null;
+		}else{
+			$this->Result = false;
+			$this->Error = ['WS_ERROR', 'Erro ao deletar dado no banco'];
+		}
+	}
+
 	/**
 	 * Magic Method : mostra os dados em JSON.
 	 * Uso: echo <Nome_da_instância>
 	 **/
 	public function __toString(){
 		return json_encode(array(
-			'Result' => $this->getResult()
+			$this->getResult()
 		));
 	}
 
 	public function getResult(){
 		return $this->Result;
 	} 
+
+
+	/**
+	 * getError
+	 * @return void
+	 */
+	public function getError() {
+ 		return $this->Error;
+	}
 
 // STATIC METHODS
 
@@ -134,6 +164,8 @@ class Usuario
 	private function setResult( $Result ){
 		$this->Result = $Result;
 	}
+
+
 
 
 }
